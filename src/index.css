@@ -1,0 +1,85 @@
+:root {
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+  background: #16171d;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #16171d;
+  color: #f3f4f6;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.siteTitle {
+  letter-spacing: 0.02em;
+}
+
+.fishCard {
+  background: #202129;
+  border-color: #343640;
+  color: #f3f4f6;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.fishCard:hover {
+  transform: translateY(-2px);
+  border-color: #6c757d;
+}
+
+.fishIcon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.72);
+  z-index: 1000;
+}
+
+.fishModal {
+  width: min(520px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  background: #202129;
+  border-color: #343640;
+  color: #f3f4f6;
+}
+
+
+.notFoundPage {
+  min-height: calc(100vh - 73px);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.notFoundActions {
+  width: min(420px, 100%);
+  padding: 1rem;
+  text-align: center;
+  background: rgba(22, 23, 29, 0.88);
+  border: 1px solid #343640;
+  border-radius: 0.5rem;
+}
+
+.authCard {
+  max-width: 420px;
+}

@@ -1,0 +1,82 @@
+{
+  "tracker": [
+    {
+      "fishId": 4926,
+      "caught": true,
+      "favorite": false,
+      "notes": "um cachorro muito bacana onde ele ficava nos esperando todo dia para lamber, um dia ninguem apareceu para ele lamber dai ele foi e se lambeu, o cachorro entao descobriu que podia ser independente e começou a se lamber  todo dia toda hora, so se lambia, ate que outro cachorro chegou e olhou ele se lambendo, curioso foi perguntar como ele fazia aquilo, e o outro cachorro respondeu, e que eu to lambendo esse cara pra ir embora mas ele nao sai caramba.",
+      "id": "cuTSGwyuyrM"
+    },
+    {
+      "fishId": 7951,
+      "caught": true,
+      "favorite": false,
+      "notes": "",
+      "id": "hV-qp483Wvk"
+    },
+    {
+      "fishId": 7689,
+      "caught": true,
+      "favorite": false,
+      "notes": "",
+      "id": "5ACGKYKWmpg"
+    },
+    {
+      "fishId": 7694,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "LEu2hywnFlI"
+    },
+    {
+      "fishId": 7679,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "KJ6br2uEMk0"
+    },
+    {
+      "fishId": 7701,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "ivS5BHtrs1U"
+    },
+    {
+      "fishId": 7931,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "lI8KCTfpf40"
+    },
+    {
+      "fishId": 7693,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "ncfYoRs5VOA"
+    },
+    {
+      "fishId": 8763,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "XfOAwF4RN6I"
+    },
+    {
+      "fishId": 8769,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "SqoEadu8fo8"
+    },
+    {
+      "fishId": 4879,
+      "caught": false,
+      "favorite": false,
+      "notes": "",
+      "id": "OVL-bn_OUAg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

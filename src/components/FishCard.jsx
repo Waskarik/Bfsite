@@ -7,6 +7,8 @@ function FishCard({ fish, setSelectedFish, currentHour }) {
     currentHour,
   );
   const isAllDay = fish.startHour === 0 && fish.endHour === 24;
+  const hasTime =
+    Number.isFinite(fish.startHour) && Number.isFinite(fish.endHour);
 
   return (
     <div
@@ -24,25 +26,42 @@ function FishCard({ fish, setSelectedFish, currentHour }) {
           />
 
           <div className="flex-grow-1">
-            <h2 className={`h5 card-title mb-2 ${fish.isBigFish ? "text-warning" : ""}`}>
+            <h2
+              className={`h5 card-title mb-2 ${fish.isBigFish ? "text-warning" : ""}`}
+            >
               {fish.name}
             </h2>
-            <p className="card-text small">Level: {fish.level}</p>
-            <p className="card-text small">Zone: {fish.zone}</p>
             <p className="card-text small">
-              Time: {isAllDay ? "All Day" : `${fish.startHour}:00 - ${fish.endHour}:00`}
+              Level: {fish.level ?? "Unavailable"}
             </p>
-            <span
-              className={`badge mt-2 ${
-                isAllDay
-                  ? "text-bg-info"
+            <p className="card-text small">
+              Zone: {fish.zone || "Unavailable"}
+            </p>
+            <p className="card-text small">
+              Time:{" "}
+              {!hasTime
+                ? "Unavailable"
+                : isAllDay
+                  ? "All Day"
+                  : `${fish.startHour}:00 - ${fish.endHour}:00`}
+            </p>
+            {hasTime && (
+              <span
+                className={`badge mt-2 ${
+                  isAllDay
+                    ? "text-bg-info"
+                    : available
+                      ? "text-bg-success"
+                      : "text-bg-secondary"
+                }`}
+              >
+                {isAllDay
+                  ? "All Day"
                   : available
-                    ? "text-bg-success"
-                    : "text-bg-secondary"
-              }`}
-            >
-              {isAllDay ? "All Day" : available ? "Available" : "Not Available"}
-            </span>
+                    ? "Available"
+                    : "Not Available"}
+              </span>
+            )}
           </div>
         </div>
       </div>

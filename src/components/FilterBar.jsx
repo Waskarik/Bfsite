@@ -1,4 +1,4 @@
-const FILTERS = ["All", "Tracked", "Caught", "Missing"];
+const FILTERS = ["All", "Available", "Tracked", "Caught", "Missing"];
 
 function FilterBar({ filter, setFilter }) {
   return (

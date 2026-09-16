@@ -3,7 +3,6 @@ import cors from "cors";
 import helmet from "helmet";
 import authRoutes from "./routes/auth.routes.js";
 
-
 const app = express();
 
 // Helmet adds security-related HTTP headers. HSTS is disabled on localhost
@@ -13,7 +12,6 @@ if (process.env.NODE_ENV === "production") {
 } else {
   app.use(helmet({ strictTransportSecurity: false }));
 }
-
 
 app.use(
   cors({

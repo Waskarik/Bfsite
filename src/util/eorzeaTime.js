@@ -10,11 +10,10 @@ export function getEorzeaTime() {
   return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}`;
 }
 
-  export function isFishAvailableTime (startHour, endHour, currentHour) {
-    if(startHour === 0 && endHour === 24) return true 
-    if(startHour < endHour) {
-    return currentHour >= startHour && currentHour < endHour;}
-    return currentHour >= startHour || currentHour < endHour;
-
+export function isFishAvailableTime(startHour, endHour, currentHour) {
+  if (startHour === 0 && endHour === 24) return true;
+  if (startHour < endHour) {
+    return currentHour >= startHour && currentHour < endHour;
   }
-  
+  return currentHour >= startHour || currentHour < endHour;
+}

@@ -11,6 +11,8 @@ function FishDetailsModal({
   const [isAdding, setIsAdding] = useState(false);
   const [marketPrice, setMarketPrice] = useState(null);
   const [isPriceLoading, setIsPriceLoading] = useState(true);
+  const [priceError, setPriceError] = useState("");
+  const [trackerError, setTrackerError] = useState("");
 
   useEffect(() => {
     getMarketPrice(fish.id)
@@ -18,7 +20,7 @@ function FishDetailsModal({
         setMarketPrice(data.minPrice);
       })
       .catch((err) => {
-        console.log(err);
+        setPriceError(err.message || "Could not load the market price.");
       })
       .finally(() => {
         setIsPriceLoading(false);
@@ -38,13 +40,14 @@ function FishDetailsModal({
     };
 
     setIsAdding(true);
+    setTrackerError("");
 
     addTrackerEntry(trackerEntry)
       .then((newEntry) => {
         onTrackerEntryAdded(newEntry);
       })
       .catch((error) => {
-        console.error("Failed to add fish to tracker:", error);
+        setTrackerError(error.message || "Could not add fish to your tracker.");
       })
       .finally(() => {
         setIsAdding(false);
@@ -57,6 +60,8 @@ function FishDetailsModal({
     : fish.baits?.join(", ");
 
   const isAllDay = fish.startHour === 0 && fish.endHour === 24;
+  const hasTime =
+    Number.isFinite(fish.startHour) && Number.isFinite(fish.endHour);
 
   return (
     <div className="modalOverlay" onClick={() => setSelectedFish(null)}>
@@ -67,6 +72,7 @@ function FishDetailsModal({
         <div className="card-body">
           <button
             className="btn btn-sm btn-outline-secondary float-end"
+            aria-label="Close fish details"
             type="button"
             onClick={() => setSelectedFish(null)}
           >
@@ -81,15 +87,62 @@ function FishDetailsModal({
               <span className="text-warning"> [ ★ Big Fish ] </span>
             )}
           </h2>
-          <p>Level: {fish.level}</p>
-          <p>Zone: {fish.zone}</p>
+          <p>Level: {fish.level ?? "Unavailable"}</p>
+          <p>Zone: {fish.zone || "Unavailable"}</p>
           <p>Spot: {primarySpot || "No spot data"}</p>
           <p>Bait: {baitText || "No bait data"}</p>
+          {fish.fishingSpots?.length > 1 && (
+            <p>
+              Other spots:{" "}
+              {fish.fishingSpots
+                .filter((spot) => spot !== primarySpot)
+                .join(", ")}
+            </p>
+          )}
+          {fish.weather?.length > 0 && (
+            <p>Weather: {fish.weather.join(", ")}</p>
+          )}
+          {fish.previousWeather?.length > 0 && (
+            <p>Previous weather: {fish.previousWeather.join(", ")}</p>
+          )}
+          {fish.tug && <p>Tug: {fish.tug}</p>}
+          {fish.hookset && <p>Hookset: {fish.hookset}</p>}
+          {fish.fishingOptions?.length > 0 && (
+            <details className="mb-3">
+              <summary>Fishing spots and bait</summary>
+              <ul className="mt-2">
+                {fish.fishingOptions.map((option, index) => (
+                  <li key={`${option.spot}-${index}`}>
+                    {option.spot}:{" "}
+                    {option.baitPath?.join(" → ") ||
+                      option.bait ||
+                      "Bait unknown"}
+                    {Number.isFinite(option.startHour) &&
+                      Number.isFinite(option.endHour) &&
+                      ` (${option.startHour}:00–${option.endHour}:00 ET)`}
+                    {option.weather?.length > 0 &&
+                      `; weather: ${option.weather.join(", ")}`}
+                    {option.previousWeather?.length > 0 &&
+                      `; previous weather: ${option.previousWeather.join(", ")}`}
+                  </li>
+                ))}
+              </ul>
+            </details>
+          )}
           <p>
-            Time: {isAllDay ? "All Day" : `${fish.startHour}:00 - ${fish.endHour}:00`}
+            Time:{" "}
+            {!hasTime
+              ? "Unavailable"
+              : isAllDay
+                ? "All Day"
+                : `${fish.startHour}:00 - ${fish.endHour}:00`}
           </p>
           {isPriceLoading ? (
             <p>Loading price...</p>
+          ) : priceError ? (
+            <p className="text-warning" role="alert">
+              {priceError}
+            </p>
           ) : marketPrice > 0 ? (
             <p>Raiden price: {marketPrice} gil</p>
           ) : (
@@ -108,6 +161,11 @@ function FishDetailsModal({
                 ? "Adding..."
                 : "Add to Tracker"}
           </button>
+          {trackerError && (
+            <p className="text-danger" role="alert">
+              {trackerError}
+            </p>
+          )}
         </div>
       </div>
     </div>

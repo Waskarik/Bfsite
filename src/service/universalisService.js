@@ -1,9 +1,11 @@
+export async function getMarketPrice(itemId) {
+  const response = await fetch(
+    `https://universalis.app/api/v2/Raiden/${itemId}`,
+  );
 
-    export function getMarketPrice(itemId) {
+  if (!response.ok) {
+    throw new Error("Could not load the Raiden market price.");
+  }
 
-        const url =`https://universalis.app/api/v2/Raiden/${itemId}`;
-        return fetch(url)
-        .then((response)=>{
-           return response.json();
-        })
-    } 
+  return response.json();
+}

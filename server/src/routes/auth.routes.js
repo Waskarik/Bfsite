@@ -29,9 +29,16 @@ function publicUser(user) {
 
 router.post("/signup", async (req, res) => {
   try {
-    const { username, email, password } = req.body;
+    const { username, email, password } = req.body || {};
 
-    if (!username || !email || !password) {
+    if (
+      typeof username !== "string" ||
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !username ||
+      !email ||
+      !password
+    ) {
       return res.status(400).json({
         message: "Username, email and password are required",
       });
@@ -50,9 +57,9 @@ router.post("/signup", async (req, res) => {
       return res.status(400).json({ message: "Enter a valid email" });
     }
 
-    if (password.length < 6) {
+    if (password.length < 8) {
       return res.status(400).json({
-        message: "Password must have at least 6 characters",
+        message: "Password must have at least 8 characters",
       });
     }
 
@@ -93,8 +100,15 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body || {};
 
-    if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required" });
+    if (
+      typeof email !== "string" ||
+      typeof password !== "string" ||
+      !email ||
+      !password
+    ) {
+      return res
+        .status(400)
+        .json({ message: "Email and password are required" });
     }
 
     const normalizedEmail = email.trim().toLowerCase();

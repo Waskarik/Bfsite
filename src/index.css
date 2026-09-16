@@ -24,7 +24,9 @@ body {
   background: #202129;
   border-color: #343640;
   color: #f3f4f6;
-  transition: transform 0.15s ease, border-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .fishCard:hover {
@@ -58,7 +60,6 @@ body {
   border-color: #343640;
   color: #f3f4f6;
 }
-
 
 .notFoundPage {
   min-height: calc(100vh - 73px);

@@ -1,7 +1,7 @@
-import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import TrackerPage from "./pages/TrackerPage";
+import ListsPage from "./pages/ListsPage";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
@@ -18,6 +18,14 @@ function App() {
         element={
           <ProtectedRoute>
             <TrackerPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/lists"
+        element={
+          <ProtectedRoute>
+            <ListsPage />
           </ProtectedRoute>
         }
       />

@@ -22,6 +22,12 @@ function SiteHeader() {
             My Tracker
           </Link>
           <Link
+            className="btn btn-sm btn-outline-light"
+            to="/lists"
+          >
+            My Lists
+          </Link>
+          <Link
             className="aboutButton btn btn-sm btn-outline-light"
             to="/about"
           >

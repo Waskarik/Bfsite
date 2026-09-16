@@ -4,7 +4,9 @@ import AuthContext from "./AuthContext";
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() =>
+    Boolean(localStorage.getItem("badfish_token")),
+  );
 
   useEffect(() => {
     let active = true;
@@ -18,7 +20,6 @@ export default function AuthProvider({ children }) {
     window.addEventListener("badfish:unauthorized", clearSession);
 
     if (!token) {
-      setLoading(false);
       return () => {
         active = false;
         window.removeEventListener("badfish:unauthorized", clearSession);

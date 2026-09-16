@@ -30,15 +30,9 @@ const trackerEntrySchema = new mongoose.Schema(
       maxlength: 1000,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-trackerEntrySchema.index(
-  { user: 1, fishId: 1 },
-  { unique: true }
-);
+trackerEntrySchema.index({ user: 1, fishId: 1 }, { unique: true });
 
-export default mongoose.model(
-  "TrackerEntry",
-  trackerEntrySchema
-);
+export default mongoose.model("TrackerEntry", trackerEntrySchema);

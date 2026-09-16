@@ -1,34 +1,25 @@
-const TRACKER_URL = "https://fffishing-server.onrender.com/tracker";
+import { apiRequest } from "./api";
 
 export function addTrackerEntry(entry) {
-  return fetch(TRACKER_URL, {
+  return apiRequest("/tracker", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(entry)
-  })
-    .then((response) => response.json());
+    body: JSON.stringify(entry),
+  });
 }
 
 export function getTrackerEntries() {
-  return fetch(TRACKER_URL)
-    .then((response) => response.json());
+  return apiRequest("/tracker");
 }
 
 export function updateTrackerEntry(id, changes) {
-  return fetch(`${TRACKER_URL}/${id}`, {
+  return apiRequest(`/tracker/${id}`, {
     method: "PATCH",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(changes)
-  })
-    .then((response) => response.json());
+    body: JSON.stringify(changes),
+  });
 }
 
 export function deleteTrackerEntry(id) {
-  return fetch(`${TRACKER_URL}/${id}`, {
-    method: "DELETE"
+  return apiRequest(`/tracker/${id}`, {
+    method: "DELETE",
   });
 }

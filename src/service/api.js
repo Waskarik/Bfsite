@@ -15,7 +15,7 @@ export async function apiRequest(path, options = {}) {
     });
   } catch {
     throw new Error(
-      "Could not reach the BadFish server. Check if the backend is running.",
+      "Could not reach the BadFish server. Check if the server is running.",
     );
   }
 
@@ -31,4 +31,4 @@ export async function apiRequest(path, options = {}) {
   }
 
   return data;
-}
+} 

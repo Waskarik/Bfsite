@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import authRoutes from "./routes/auth.routes.js";
 
+
 const app = express();
 
 // Helmet adds security-related HTTP headers. HSTS is disabled on localhost
@@ -13,6 +14,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(helmet({ strictTransportSecurity: false }));
 }
 
+
 app.use(
   cors({
     origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
@@ -20,6 +22,7 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get("/api/health", (req, res) => {
   res.json({ ok: true, service: "badfish-auth-server" });

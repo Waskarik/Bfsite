@@ -7,6 +7,7 @@ import {
 import { getXivapiItemsByIds } from "../service/xivapiService";
 import useFishCatalogue from "../service/useFishCatalogue";
 import SiteHeader from "../components/SiteHeader";
+import FishDetailsModal from "../components/FishDetailsModal.jsx";
 
 function TrackerPage() {
   const {
@@ -16,6 +17,7 @@ function TrackerPage() {
     retry,
   } = useFishCatalogue();
   const [tracker, setTracker] = useState([]);
+  const [selectedFish, setSelectedFish] = useState(null);
   const [notesDraft, setNotesDraft] = useState({});
   const [fishMetadata, setFishMetadata] = useState({});
   const [fishRefreshIncomplete, setFishRefreshIncomplete] = useState(false);
@@ -108,6 +110,15 @@ function TrackerPage() {
       <main className="container py-4">
         <h1 className="h2 mb-4">My Tracker</h1>
 
+        {selectedFish && (
+          <FishDetailsModal
+            key={selectedFish.id}
+            fish={selectedFish}
+            setSelectedFish={setSelectedFish}
+            isTracked={true}
+          />
+        )}
+
         {trackedFishIds.length > 0 && (missingDetails || incomplete) && (
           <p className="small text-secondary" role="status">
             Some fish data could not be refreshed. Local data is being used.
@@ -156,7 +167,18 @@ function TrackerPage() {
                         loading="lazy"
                       />
                     )}
-                    <h3 className="h5 card-title">{fish.name}</h3>
+                    <div className="d-flex align-items-start justify-content-between gap-2">
+                      <h3 className="h5 card-title">{fish.name}</h3>
+                      <button
+                        className="btn btn-sm btn-outline-info rounded-circle flex-shrink-0"
+                        type="button"
+                        aria-label={"View details for " + fish.name}
+                        title="View fish details"
+                        onClick={() => setSelectedFish(fish)}
+                      >
+                        i
+                      </button>
+                    </div>
                     <p className="card-text small">
                       Zone: {fish.zone || "Unavailable"}
                     </p>

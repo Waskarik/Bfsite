@@ -159,18 +159,21 @@ function TrackerPage() {
               <div className="col-12 col-lg-6" key={entry.id}>
                 <div className="card h-100 text-start bg-dark text-light">
                   <div className="card-body">
-                    {fish.iconUrl && (
-                      <img
-                        className="fishIcon mb-2"
-                        src={fish.iconUrl}
-                        alt={fish.name}
-                        loading="lazy"
-                      />
-                    )}
-                    <div className="d-flex align-items-start justify-content-between gap-2">
-                      <h3 className="h5 card-title">{fish.name}</h3>
+                    <div className="d-flex align-items-start justify-content-between gap-3">
+                      <div className="flex-grow-1" style={{ minWidth: 0 }}>
+                        {fish.iconUrl && (
+                          <img
+                            className="fishIcon mb-2"
+                            src={fish.iconUrl}
+                            alt={fish.name}
+                            loading="lazy"
+                          />
+                        )}
+                        <h3 className="h5 card-title text-break">{fish.name}</h3>
+                      </div>
                       <button
-                        className="btn btn-sm btn-outline-info rounded-circle flex-shrink-0"
+                        className="btn btn-outline-info rounded-2 flex-shrink-0 d-inline-flex align-items-center justify-content-center p-0 fw-semibold shadow-sm"
+                        style={{ width: 36, height: 36 }}
                         type="button"
                         aria-label={"View details for " + fish.name}
                         title="View fish details"
